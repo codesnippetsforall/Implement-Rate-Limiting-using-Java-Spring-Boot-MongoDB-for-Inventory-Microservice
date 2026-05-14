@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: inventory-service
+  data:
+    mongodb:
+      # Default host only; database name is set separately (Spring applies it when URI has no path).
+      uri: ${MONGODB_URI:mongodb://localhost:27017}
+      database: ${MONGODB_DATABASE:inventory}
+      auto-index-creation: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# Resilience4j: rate limiting (requests per window) + bulkhead (concurrent call throttling)
+resilience4j:
+  ratelimiter:
+    instances:
+      inventoryRead:
+        limitForPeriod: 5
+        limitRefreshPeriod: 10s
+        timeoutDuration: 0
+      inventoryWrite:
+        limitForPeriod: 10
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+  bulkhead:
+    instances:
+      inventoryApi:
+        maxConcurrentCalls: 20
+        maxWaitDuration: 0

@@ -1,0 +1,29 @@
+[
+  {
+    "_id": { "$oid": "507f1f77bcf86cd799439011" },
+    "sku": "SKU-1001",
+    "name": "Sample bolts",
+    "quantity": 100,
+    "unitPrice": { "$numberDecimal": "19.99" },
+    "createdAt": { "$date": "2026-01-01T10:00:00.000Z" },
+    "updatedAt": { "$date": "2026-01-01T10:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "507f1f77bcf86cd799439012" },
+    "sku": "SKU-2002",
+    "name": "Steel plates (demo)",
+    "quantity": 25,
+    "unitPrice": { "$numberDecimal": "45.00" },
+    "createdAt": { "$date": "2026-01-02T14:30:00.000Z" },
+    "updatedAt": { "$date": "2026-01-02T14:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "507f1f77bcf86cd799439013" },
+    "sku": "SKU-3003",
+    "name": "Copper wire spool",
+    "quantity": 15,
+    "unitPrice": { "$numberDecimal": "89.00" },
+    "createdAt": { "$date": "2026-01-03T09:15:00.000Z" },
+    "updatedAt": { "$date": "2026-01-03T09:15:00.000Z" }
+  }
+]

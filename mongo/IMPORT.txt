@@ -1,0 +1,29 @@
+Database: inventory
+Collection: inventory-items
+
+The Spring Boot app maps the entity to this exact collection name (hyphen, not underscore).
+
+Prerequisites: MongoDB running (e.g. mongod on localhost:27017).
+
+The database and collection are created automatically when you first insert data (no separate "create database" step is required).
+
+0) Optional — create empty database/collection first (mongosh)
+
+   mongosh mongodb://localhost:27017/inventory --eval "db.createCollection('inventory-items')"
+
+1) Import sample documents (from project root; creates DB/collection if missing)
+
+   mongoimport --uri="mongodb://localhost:27017/inventory" --collection=inventory-items --file=mongo/inventory-items.json --jsonArray
+
+2) Or use mongosh (MongoDB Shell) — creates DB implicitly and inserts rows
+
+   mongosh "mongodb://localhost:27017/inventory" mongo/seed.mongosh.js
+
+3) Or paste in mongosh interactively
+
+   mongosh mongodb://localhost:27017/inventory
+
+   Then run the insert block from mongo/seed.mongosh.js (copy-paste).
+
+After import, GET http://localhost:8080/api/v1/inventory should list three items.
+Item ids in URLs are 24-character hex strings (ObjectId), e.g. 507f1f77bcf86cd799439011

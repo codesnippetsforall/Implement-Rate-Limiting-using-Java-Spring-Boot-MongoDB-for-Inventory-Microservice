@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "Inventory Service",
+    "description": "REST API for the Spring Boot inventory microservice (OpenAPI 3 at {{baseUrl}}/api-docs).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "itemId",
+      "value": "507f1f77bcf86cd799439011"
+    }
+  ],
+  "item": [
+    {
+      "name": "OpenAPI JSON",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api-docs"
+      }
+    },
+    {
+      "name": "List inventory",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/inventory"
+      }
+    },
+    {
+      "name": "Get item by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/inventory/{{itemId}}"
+      }
+    },
+    {
+      "name": "Create item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "  const j = pm.response.json();",
+              "  if (j && j.id) { pm.collectionVariables.set('itemId', String(j.id)); }",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"SKU-POST-001\",\n  \"name\": \"Sample widget\",\n  \"quantity\": 42,\n  \"unitPrice\": 19.99\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/inventory"
+      }
+    },
+    {
+      "name": "Update item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated widget\",\n  \"quantity\": 10,\n  \"unitPrice\": 21.50\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/inventory/{{itemId}}"
+      }
+    },
+    {
+      "name": "Delete item",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/inventory/{{itemId}}"
+      }
+    }
+  ]
+}
