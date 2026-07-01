@@ -3,9 +3,11 @@ package com.example.inventory.dto;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+@Data
 public class UpdateInventoryRequest {
 
     @Size(max = 255)
@@ -16,28 +18,4 @@ public class UpdateInventoryRequest {
 
     @DecimalMin(value = "0.0", inclusive = true)
     private BigDecimal unitPrice;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
 }
